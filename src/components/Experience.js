@@ -6,7 +6,12 @@ const defaultExperience = {
   id: uniqid(),
   companyName: "4DViews",
   positionTitle: "Web Developer",
-  mainTasks: ["Refonte de la page studios"],
+  mainTasks: [
+    {
+      id: uniqid(),
+      text: "Refonte de la page studios",
+    },
+  ],
   workPeriod: "Avril 2023",
 };
 
@@ -26,6 +31,21 @@ export default class Experience extends Component {
     }));
   };
 
+  handleUpdateTasks = (experienceId, taskId, text) => {
+    this.setState((prevState) => ({
+      workExperiences: prevState.workExperiences.map((experience) =>
+        experience.id === experienceId
+          ? {
+              ...experience,
+              mainTasks: experience.mainTasks.map((task) =>
+                task.id === taskId ? { ...task, text: text } : task
+              ),
+            }
+          : experience
+      ),
+    }));
+  };
+
   handleAddWorkExperience = () => {
     this.setState((prevState) => ({
       workExperiences: [
@@ -35,17 +55,27 @@ export default class Experience extends Component {
     }));
   };
 
-  // handleUpdateTasks = () => {
-  //
-  // };
+  handleAddTask = (id) => {
+    this.setState((prevState) => ({
+      workExperiences: prevState.workExperiences.map((experience) => {
+        return experience.id === id
+          ? {
+              ...experience,
+              mainTasks: [
+                ...experience.mainTasks,
+                { id: uniqid(), text: "Enter New Task" },
+              ],
+            }
+          : experience;
+      }),
+    }));
+  };
 
   handleDeleteWorkExperience = (id) => {
     this.setState((prevState) => ({
-      workExperiences: prevState.workExperiences.filter(
-        (experience) => {
-          return experience.id !== id;
-        }
-      ),
+      workExperiences: prevState.workExperiences.filter((experience) => {
+        return experience.id !== id;
+      }),
     }));
   };
 
@@ -54,7 +84,10 @@ export default class Experience extends Component {
       <div>
         <div className="data-block work-experience">
           {this.state.workExperiences.map((experience, index) => (
-            <div className="work-experience experience-section" key={experience.id}>
+            <div
+              className="work-experience experience-section"
+              key={experience.id}
+            >
               <div className="experience-header">
                 <h3>Work Experience {index + 1}</h3>
                 <button
@@ -65,22 +98,49 @@ export default class Experience extends Component {
               </div>
               <Input
                 text={experience.companyName}
-                onUpdate={(text) => this.handleUpdateWorkExperience(experience.id, "companyName", text)}
+                onUpdate={(text) =>
+                  this.handleUpdateWorkExperience(
+                    experience.id,
+                    "companyName",
+                    text
+                  )
+                }
               />
               <Input
                 text={experience.positionTitle}
-                onUpdate={(text) => this.handleUpdateWorkExperience(experience.id, "companyName", text)}
+                onUpdate={(text) =>
+                  this.handleUpdateWorkExperience(
+                    experience.id,
+                    "companyName",
+                    text
+                  )
+                }
               />
-              {experience.mainTasks.map((task, index) => (
-                <Input
-                  key={index}
-                  text={task}
-                  // onUpdate={(text) => this.handleUpdateWorkExperience(experience.id, "companyName", text)}
-                />
-              ))}
+              <ul>
+                {experience.mainTasks.map((task) => (
+                  <li>
+                    <Input
+                      key={task.id}
+                      text={task.text}
+                      onUpdate={(text) =>
+                        this.handleUpdateTasks(experience.id, task.id, text)
+                      }
+                    />
+                  </li>
+                ))}
+              </ul>
+              <button onClick={() => this.handleAddTask(experience.id)}>
+                +
+              </button>
               <Input
                 text={experience.workPeriod}
-                onUpdate={(text) => this.handleUpdateWorkExperience(experience.id, "workPeriod", text)}
+                onUpdate={(text) =>
+                  this.handleUpdateWorkExperience(
+                    experience.id,
+                    "workPeriod",
+                    text
+                  )
+                }
               />
             </div>
           ))}
