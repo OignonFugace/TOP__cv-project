@@ -51,54 +51,56 @@ export default class Education extends Component {
 
   render() {
     return (
-      <div className="data-block work-experiences">
-        {this.state.educationalExperiences.map((experience, index) => (
-          <div
-            className="educational-experience experience-section"
-            key={experience.id}
-          >
-            <div className="experience-header">
-              <h3>Educational Experience {index + 1}</h3>
-              <button
-                onClick={() => {
-                  this.handleDeleteEducationalExperience(experience.id);
-                }}
-              >
-                X
-              </button>
+      <div>
+        <div className="data-block work-experiences">
+          {this.state.educationalExperiences.map((experience, index) => (
+            <div
+              className="educational-experience experience-section"
+              key={experience.id}
+            >
+              <div className="experience-header">
+                <h3>Educational Experience {index + 1}</h3>
+                <button
+                  onClick={() => {
+                    this.handleDeleteEducationalExperience(experience.id);
+                  }}
+                >
+                  X
+                </button>
+              </div>
+              <Input
+                text={experience.schoolName}
+                onUpdate={(text) =>
+                  this.handleUpdateEducationalExperience(
+                    experience.id,
+                    "schoolName",
+                    text
+                  )
+                }
+              />
+              <Input
+                text={experience.studyTitle}
+                onUpdate={(text) =>
+                  this.handleUpdateEducationalExperience(
+                    experience.id,
+                    "studyTitle",
+                    text
+                  )
+                }
+              />
+              <Input
+                text={experience.studyPeriod}
+                onUpdate={(text) =>
+                  this.handleUpdateEducationalExperience(
+                    experience.id,
+                    "studyPeriod",
+                    text
+                  )
+                }
+              />
             </div>
-            <Input
-              text={experience.schoolName}
-              onUpdate={(text) =>
-                this.handleUpdateEducationalExperience(
-                  experience.id,
-                  "schoolName",
-                  text
-                )
-              }
-            />
-            <Input
-              text={experience.studyTitle}
-              onUpdate={(text) =>
-                this.handleUpdateEducationalExperience(
-                  experience.id,
-                  "studyTitle",
-                  text
-                )
-              }
-            />
-            <Input
-              text={experience.studyPeriod}
-              onUpdate={(text) =>
-                this.handleUpdateEducationalExperience(
-                  experience.id,
-                  "studyPeriod",
-                  text
-                )
-              }
-            />
-          </div>
-        ))}
+          ))}
+        </div>
         <button onClick={this.handleAddEducationalExperience}>
           Add New Education Experience
         </button>

@@ -35,39 +35,56 @@ export default class Experience extends Component {
     }));
   };
 
-  // handleUpdateTasks = ()
+  // handleUpdateTasks = () => {
+  //
+  // };
+
+  handleDeleteWorkExperience = (id) => {
+    this.setState((prevState) => ({
+      workExperiences: prevState.workExperiences.filter(
+        (experience) => {
+          return experience.id !== id;
+        }
+      ),
+    }));
+  };
 
   render() {
     return (
-      <div className="data-block work-experience">
-        {this.state.workExperiences.map((experience, index) => (
-          <div className="work-experience experience-section" key={index}>
-            {/* Il faut pouvoir ne pas afficher le bouton dans le cas de la première expérience */}
-            <div className="experience-header">
-              <h3>Work Experience {index + 1}</h3>
-              <button>X</button>
-            </div>
-            <Input
-              text={experience.companyName}
-              onUpdate={this.handleUpdateWorkExperience}
-            />
-            <Input
-              text={experience.positionTitle}
-              onUpdate={this.handleUpdateWorkExperience}
-            />
-            {experience.mainTasks.map((task, index) => (
+      <div>
+        <div className="data-block work-experience">
+          {this.state.workExperiences.map((experience, index) => (
+            <div className="work-experience experience-section" key={experience.id}>
+              <div className="experience-header">
+                <h3>Work Experience {index + 1}</h3>
+                <button
+                  onClick={() => this.handleDeleteWorkExperience(experience.id)}
+                >
+                  X
+                </button>
+              </div>
               <Input
-                key={index}
-                text={task}
-                onUpdate={this.handleUpdateTasks}
+                text={experience.companyName}
+                onUpdate={(text) => this.handleUpdateWorkExperience(experience.id, "companyName", text)}
               />
-            ))}
-            <Input
-              text={experience.workPeriod}
-              onUpdate={this.handleUpdateWorkExperience}
-            />
-          </div>
-        ))}
+              <Input
+                text={experience.positionTitle}
+                onUpdate={(text) => this.handleUpdateWorkExperience(experience.id, "companyName", text)}
+              />
+              {experience.mainTasks.map((task, index) => (
+                <Input
+                  key={index}
+                  text={task}
+                  // onUpdate={(text) => this.handleUpdateWorkExperience(experience.id, "companyName", text)}
+                />
+              ))}
+              <Input
+                text={experience.workPeriod}
+                onUpdate={(text) => this.handleUpdateWorkExperience(experience.id, "workPeriod", text)}
+              />
+            </div>
+          ))}
+        </div>
         <button onClick={this.handleAddWorkExperience}>
           Add New Work Experience
         </button>

@@ -110,6 +110,10 @@ body {
   text-decoration: underline;
 }
 
+.data-block {
+  margin-bottom: 1rem;
+}
+
 .experience-section + .experience-section {
   margin-top: 1rem;
 }
