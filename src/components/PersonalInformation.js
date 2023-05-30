@@ -1,26 +1,40 @@
 import React, { Component } from "react";
+import Input from "./Input.js";
 
 export default class PersonalInformation extends Component {
-    constructor() {
-        super();
-        this.state = {
-            personalInfo: {
-                fullName: "Enter Full Name",
-                email: "Enter Email Address",
-                phoneNumber: "Enter Phone Number",
-            }
-        }
-    }
+  constructor() {
+    super();
+    this.state = {
+      personalInfo: {
+        fullName: "Tanguy Freycon",
+        email: "tanguy.freycon@gmail.com",
+        phoneNumber: "07 67 68 57 30",
+      },
+    };
+  }
 
-    render() {
-        return (
-            <div>
-                {Object.entries(this.state.personalInfo).map(([key, value], index) =>
-                    <div key={index}>
-                        {key}: {value}
-                    </div>
-                )}
-            </div>
-        );
-    }
+  handleUpdatePersonalInfo = (id, text) => {
+    this.setState((prevState) => ({
+      personalInfo: {
+        ...prevState.personalInfo,
+        [id]: text,
+      },
+    }));
+  };
+
+  render() {
+    return (
+      <div className="data-block personal-information">
+        <h2>Personal Information</h2>
+        {Object.entries(this.state.personalInfo).map(([key, value], index) => (
+          <Input
+            key={index}
+            text={value}
+            id={key}
+            onUpdate={this.handleUpdatePersonalInfo}
+          />
+        ))}
+      </div>
+    );
+  }
 }
