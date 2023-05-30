@@ -3,6 +3,7 @@ import Input from "./Input";
 import uniqid from "uniqid";
 
 const defaultExperience = {
+  id: uniqid(),
   schoolName: "MIT",
   studyTitle: "Computer Science",
   studyPeriod: "09/2018 - 06/2022",
@@ -14,7 +15,6 @@ export default class Education extends Component {
     this.state = {
       educationalExperiences: [
         {
-          id: uniqid(),
           ...defaultExperience,
         },
       ],
@@ -55,29 +55,47 @@ export default class Education extends Component {
         {this.state.educationalExperiences.map((experience, index) => (
           <div
             className="educational-experience experience-section"
-            key={index}
+            key={experience.id}
           >
             <div className="experience-header">
               <h3>Educational Experience {index + 1}</h3>
               <button
-                onClick={() =>
-                  this.handleDeleteEducationalExperience(experience.id)
-                }
+                onClick={() => {
+                  this.handleDeleteEducationalExperience(experience.id);
+                }}
               >
                 X
               </button>
             </div>
             <Input
               text={experience.schoolName}
-              onUpdate={this.handleUpdateEducationalExperience}
+              onUpdate={(text) =>
+                this.handleUpdateEducationalExperience(
+                  experience.id,
+                  "schoolName",
+                  text
+                )
+              }
             />
             <Input
               text={experience.studyTitle}
-              onUpdate={this.handleUpdateEducationalExperience}
+              onUpdate={(text) =>
+                this.handleUpdateEducationalExperience(
+                  experience.id,
+                  "studyTitle",
+                  text
+                )
+              }
             />
             <Input
               text={experience.studyPeriod}
-              onUpdate={this.handleUpdateEducationalExperience}
+              onUpdate={(text) =>
+                this.handleUpdateEducationalExperience(
+                  experience.id,
+                  "studyPeriod",
+                  text
+                )
+              }
             />
           </div>
         ))}

@@ -22,7 +22,7 @@ export default class Input extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    this.props.onUpdate(this.props.id, this.state.text);
+    this.props.onUpdate(this.state.text);
     this.toggleEdit();
   };
 
