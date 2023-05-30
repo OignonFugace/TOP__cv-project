@@ -71,9 +71,24 @@ export default class Experience extends Component {
     }));
   };
 
-  handleDeleteWorkExperience = (id) => {
+  handleDeleteTask = (experienceId, taskId) => {
     this.setState((prevState) => ({
-      workExperiences: prevState.workExperiences.filter((experience) => {
+      workExperiences: prevState.workExperiences.map((experience) =>
+        experience.id === experienceId
+          ? {
+              ...experience,
+            mainTasks: experience.mainTasks.filter((task) =>{
+              return task.id !== taskId;
+            }),
+            }
+          : experience
+      ),
+    }));
+  };
+
+  handleDeleteWorkExperience = (id) => {
+    this.setState((prevstate) => ({
+      workExperiences: prevstate.workExperiences.filter((experience) => {
         return experience.id !== id;
       }),
     }));
@@ -118,14 +133,20 @@ export default class Experience extends Component {
               />
               <ul>
                 {experience.mainTasks.map((task) => (
-                  <li>
+                  <li className="task-item" key={task.id}>
                     <Input
-                      key={task.id}
                       text={task.text}
                       onUpdate={(text) =>
                         this.handleUpdateTasks(experience.id, task.id, text)
                       }
                     />
+                    <button
+                      onClick={() =>
+                        this.handleDeleteTask(experience.id, task.id)
+                      }
+                    >
+                      X
+                    </button>
                   </li>
                 ))}
               </ul>

@@ -114,6 +114,16 @@ body {
   margin-bottom: 1rem;
 }
 
+.task-item {
+  display: flex;
+  gap: 1ch;
+}
+
+.data-block button {
+  font-family: monospace;
+  padding: 0 1ch;
+}
+
 .experience-section + .experience-section {
   margin-top: 1rem;
 }
@@ -121,11 +131,6 @@ body {
 .experience-header {
   display: flex;
   gap: 1ch;
-}
-
-.experience-header button {
-  font-family: monospace;
-  padding: 0 1ch;
 }
 
 input {
