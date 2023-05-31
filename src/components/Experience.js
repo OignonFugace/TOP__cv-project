@@ -4,15 +4,19 @@ import uniqid from "uniqid";
 
 const defaultExperience = {
   id: uniqid(),
-  companyName: "4DViews",
-  positionTitle: "Web Developer",
+  companyName: "XYZ Corp.",
+  positionTitle: "Software Engineer",
   mainTasks: [
     {
       id: uniqid(),
-      text: "Refonte de la page studios",
+      text: "Developed and maintained web applications",
+    },
+    {
+      id: uniqid(),
+      text: "Collaborated in cross-functional teams to improve software design",
     },
   ],
-  workPeriod: "Avril 2023",
+  workPeriod: "January 2022 - Present",
 };
 
 export default class Experience extends Component {

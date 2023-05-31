@@ -6,9 +6,9 @@ export default class PersonalInformation extends Component {
     super();
     this.state = {
       personalInfo: {
-        fullName: "Tanguy Freycon",
-        email: "tanguy.freycon@gmail.com",
-        phoneNumber: "07 67 68 57 30",
+        fullName: "Full Name",
+        email: "email@example.com",
+        phoneNumber: "+00 000 000 0000",
       },
     };
   }
