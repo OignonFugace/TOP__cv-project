@@ -4,9 +4,9 @@ import uniqid from "uniqid";
 
 const defaultExperience = {
   id: uniqid(),
-  schoolName: "MIT",
-  studyTitle: "Computer Science",
-  studyPeriod: "09/2018 - 06/2022",
+  schoolName: "Stanford University",
+  studyTitle: "Bachelor's in Computer Science",
+  studyPeriod: "08/2023 - 05/2027",
 };
 
 export default class Education extends Component {

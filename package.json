@@ -1,10 +1,9 @@
 {
   "name": "cv-project",
   "version": "0.1.0",
-  "homepage": "https://{username}.github.io/{repo-name}",
+  "homepage": "https://oignonfugace.github.io/TOP__cv-project",
   "private": true,
   "dependencies": {
-    "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "react": "^18.2.0",
@@ -24,7 +23,6 @@
   "eslintConfig": {
     "extends": [
       "react-app",
-      "react-app/jest"
     ]
   },
   "browserslist": {
