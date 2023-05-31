@@ -4,7 +4,7 @@ import uniqid from "uniqid";
 
 const defaultExperience = {
   id: uniqid(),
-  schoolName: "Stanford University",
+  schoolName: "XYZ University",
   studyTitle: "Bachelor's in Computer Science",
   studyPeriod: "08/2023 - 05/2027",
 };
