@@ -1,53 +1,43 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 
-export default class Input extends Component {
-  constructor(props) {
-    super(props);
+const Input = props => {
+  const [text, setText] = useState(props.text || "");
+  const [isEditing, setIsEditing] = useState(false);
 
-    this.state = {
-      text: this.props.text || "",
-      isEditing: false,
-    };
-  }
-
-  handleChange = (e) => {
-    this.setState({
-      text: e.target.value,
-    });
+  const handleChange = e => {
+    setText(e.target.value);
   };
 
-  handleFocus = (e) => {
+  const handleFocus = e => {
     e.target.select();
   };
 
-  handleSubmit = (e) => {
+  const handleSubmit = e => {
     e.preventDefault();
-    this.props.onUpdate(this.state.text);
-    this.toggleEdit();
+    props.onUpdate(text);
+    toggleEdit();
   };
 
-  toggleEdit = () => {
-    this.setState((prevState) => ({
-      isEditing: !prevState.isEditing,
-    }));
+  const toggleEdit = () => {
+    setIsEditing(prevIsEditing => !prevIsEditing);
   };
 
-  render() {
-    return this.state.isEditing ? (
-      <form onSubmit={this.handleSubmit}>
-        <input
-          autoFocus
-          onFocus={this.handleFocus}
-          onChange={this.handleChange}
-          onBlur={this.handleSubmit}
-          value={this.state.text}
-          type="text"
-        />
-      </form>
-    ) : (
-      <div className="editable" onClick={this.toggleEdit}>
-        {this.state.text}
-      </div>
-    );
-  }
-}
+  return isEditing ? (
+    <form onSubmit={handleSubmit}>
+      <input
+        autoFocus
+        onFocus={handleFocus}
+        onChange={handleChange}
+        onBlur={handleSubmit}
+        value={text}
+        type="text"
+      />
+    </form>
+  ) : (
+    <div className="editable" onClick={toggleEdit}>
+      {text}
+    </div>
+  );
+};
+
+export default Input;
